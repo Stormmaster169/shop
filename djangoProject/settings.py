@@ -41,6 +41,10 @@ INSTALLED_APPS = [
     'landing',
     'products',
     'orders',
+    'managment_area',
+
+    # external_packages
+    'django_summernote',
 ]
 
 MIDDLEWARE = [
@@ -68,6 +72,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
 
                 'orders.context_processors.getting_basket_info',
+                'managment_area.context_processors.getting_privacy_policy',
             ],
         },
     },
@@ -137,3 +142,5 @@ try:
     from .settings_prod import *
 except:
     pass
+
+X_FRAME_OPTIONS='SAMEORIGIN'
