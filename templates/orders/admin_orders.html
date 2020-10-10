@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" />
+
+    <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+
+    <script type="text/javascript">
+
+    $(document).ready(function() {
+      $('#orders_table').DataTable(
+          {
+              "order": [[0, "asc"]],
+              "pageLength": 8,
+          }
+      );
+    });
+
+    </script>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-lg-offset-1">
+                <h3>Заказы</h3>
+                <table width="100%" class="display" id="orders_table">
+                    <thead>
+                        <tr>
+                            <td>
+                                Имя
+                            </td>
+                            <td>
+                                Телефон
+                            </td>
+                            <td>
+                                Количество Товаров
+                            </td>
+                            <td>
+                                Товары в заказе
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in orders %}
+                            <tr>
+                                <td>{{ item.customer_name }}</td>
+                                <td>{{ item.customer_phone }}</td>
+                                <td>{{ item.products_nmb }}</td>
+                                <td>
+                                    <ul>
+                                        {% for product in item.products %}
+                                        <li>
+                                            {{ product.product__name }}: {{ product.nmb }}шт. по {{ product.price_per_item }} = {{ product.total_price }}
+                                        </li>
+                                    {% endfor %}
+                                    </ul>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{#{% block js_stuff %}#}
+{##}
+{#<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">#}
+{##}
+{#<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>#}
+{##}
+{#<script>#}
+{##}
+{#    $(document).ready(function () {#}
+{#        $('#orders_table').dataTable(#}
+{#            {#}
+{#                "order": [[ 0, "asc"]],#}
+{#                "pageLength": 10,#}
+{#            }#}
+{#        );#}
+{#    });#}
+{##}
+{#</script>#}
+{#{% endblock js_stuff %} #}
